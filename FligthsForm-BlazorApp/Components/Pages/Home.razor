@@ -1,0 +1,62 @@
+﻿@page "/"
+
+<div class="card">
+  <div class="card-header">
+        <h1> <b>Fligths Registration App</b></h1>
+  </div>
+  <div class="card-body">
+<EditForm Model="@flight" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label for="flightNumber" class="form-label">Flight Number</label>
+        <InputText id="flightNumber" class="form-control" @bind-Value="flight.FlightNumber" />
+        <ValidationMessage For="@(() => flight.FlightNumber)" />
+    </div>
+
+    <div class="mb-3">
+        <label for="departure" class="form-label">Departure</label>
+        <InputText id="departure" class="form-control" @bind-Value="flight.Departure" />
+        <ValidationMessage For="@(() => flight.Departure)" />
+    </div>
+
+    <div class="mb-3">
+        <label for="destination" class="form-label">Destination</label>
+        <InputText id="destination" class="form-control" @bind-Value="flight.Destination" />
+        <ValidationMessage For="@(() => flight.Destination)" />
+    </div>
+
+    <div class="mb-3">
+        <label for="departureTime" class="form-label">Departure Time</label>
+        <InputDate id="departureTime" class="form-control" @bind-Value="flight.DepartureTime" />
+        <ValidationMessage For="@(() => flight.DepartureTime)" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register Flight</button>
+</EditForm>
+    </div>
+</div>
+@code {
+    private Flight flight = new Flight();
+
+    private void HandleValidSubmit()
+    {
+        // Handle the form submission, e.g., save the flight details to a database
+    }
+
+    public class Flight
+    {
+        [Required]
+        public string FlightNumber { get; set; }
+
+        [Required]
+        public string Departure { get; set; }
+
+        [Required]
+        public string Destination { get; set; }
+
+        [Required]
+        public DateTime DepartureTime { get; set; }
+    }
+}
